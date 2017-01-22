@@ -1,0 +1,87 @@
+Description: shared FFmpeg
+Index: ppsspp-1.3.0/Qt/Settings.pri
+===================================================================
+--- ppsspp-1.3.0.orig/Qt/Settings.pri	2017-01-01 22:09:40.250086358 -0200
++++ ppsspp-1.3.0/Qt/Settings.pri	2017-01-01 22:09:40.242086224 -0200
+@@ -32,11 +32,9 @@
+ # Work out platform name
+ include(Platform/OSDetection.pri)
+ # OS dependent paths
+-!system_ffmpeg: INCLUDEPATH += $$P/ffmpeg/$${PLATFORM_NAME}/$${PLATFORM_ARCH}/include
+ 
+ !contains(CONFIG, staticlib) {
+ 	QMAKE_LIBDIR += $$CONFIG_DIR
+-	!system_ffmpeg: QMAKE_LIBDIR += $$P/ffmpeg/$${PLATFORM_NAME}/$${PLATFORM_ARCH}/lib/
+ 	contains(DEFINES, USE_FFMPEG): LIBS+=  -lavformat -lavcodec -lavutil -lswresample -lswscale
+ 	equals(PLATFORM_NAME, "linux"):arm|android: LIBS += -lEGL
+ }
+Index: ppsspp-1.3.0/Core/HLE/sceAtrac.cpp
+===================================================================
+--- ppsspp-1.3.0.orig/Core/HLE/sceAtrac.cpp	2017-01-01 22:09:40.250086358 -0200
++++ ppsspp-1.3.0/Core/HLE/sceAtrac.cpp	2017-01-01 22:09:40.242086224 -0200
+@@ -119,9 +119,9 @@
+ #ifdef USE_FFMPEG
+ 
+ extern "C" {
+-#include "libavformat/avformat.h"
+-#include "libswresample/swresample.h"
+-#include "libavutil/samplefmt.h"
++#include <libavformat/avformat.h>
++#include <libswresample/swresample.h>
++#include <libavutil/samplefmt.h>
+ }
+ 
+ #endif // USE_FFMPEG
+Index: ppsspp-1.3.0/Core/HLE/sceMpeg.cpp
+===================================================================
+--- ppsspp-1.3.0.orig/Core/HLE/sceMpeg.cpp	2017-01-01 22:09:40.250086358 -0200
++++ ppsspp-1.3.0/Core/HLE/sceMpeg.cpp	2017-01-01 22:09:40.246086291 -0200
+@@ -98,9 +98,9 @@
+ #ifdef USE_FFMPEG 
+ 
+ extern "C" {
+-#include "libavformat/avformat.h"
+-#include "libavutil/imgutils.h"
+-#include "libswscale/swscale.h"
++#include <libavformat/avformat.h>
++#include <libavutil/imgutils.h>
++#include <libswscale/swscale.h>
+ }
+ static AVPixelFormat pmp_want_pix_fmt;
+ 
+Index: ppsspp-1.3.0/Core/HW/MediaEngine.cpp
+===================================================================
+--- ppsspp-1.3.0.orig/Core/HW/MediaEngine.cpp	2017-01-01 22:09:40.250086358 -0200
++++ ppsspp-1.3.0/Core/HW/MediaEngine.cpp	2017-01-01 22:09:40.246086291 -0200
+@@ -32,10 +32,10 @@
+ 
+ extern "C" {
+ 
+-#include "libavcodec/avcodec.h"
+-#include "libavformat/avformat.h"
+-#include "libavutil/imgutils.h"
+-#include "libswscale/swscale.h"
++#include <libavcodec/avcodec.h>
++#include <libavformat/avformat.h>
++#include <libavutil/imgutils.h>
++#include <libswscale/swscale.h>
+ 
+ }
+ #endif // USE_FFMPEG
+Index: ppsspp-1.3.0/Core/HW/SimpleAudioDec.cpp
+===================================================================
+--- ppsspp-1.3.0.orig/Core/HW/SimpleAudioDec.cpp	2017-01-01 22:09:40.250086358 -0200
++++ ppsspp-1.3.0/Core/HW/SimpleAudioDec.cpp	2017-01-01 22:09:40.246086291 -0200
+@@ -26,9 +26,9 @@
+ #ifdef USE_FFMPEG
+ 
+ extern "C" {
+-#include "libavformat/avformat.h"
+-#include "libswresample/swresample.h"
+-#include "libavutil/samplefmt.h"
++#include <libavformat/avformat.h>
++#include <libswresample/swresample.h>
++#include <libavutil/samplefmt.h>
+ }
+ 
+ #endif  // USE_FFMPEG

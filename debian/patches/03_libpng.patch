@@ -1,0 +1,27 @@
+Description: shared libpng
+Index: ppsspp-git/Core/Screenshot.cpp
+===================================================================
+--- ppsspp-git.orig/Core/Screenshot.cpp	2015-06-25 15:37:39.000000000 -0300
++++ ppsspp-git/Core/Screenshot.cpp	2015-06-25 15:37:48.000000000 -0300
+@@ -18,7 +18,7 @@
+ #ifdef USING_QT_UI
+ #include <QtGui/QImage>
+ #else
+-#include <libpng17/png.h>
++#include <libpng/png.h>
+ #include "ext/jpge/jpge.h"
+ #endif
+ 
+Index: ppsspp-git/native/image/png_load.cpp
+===================================================================
+--- ppsspp-git.orig/ext/native/image/png_load.cpp	2015-06-25 15:37:39.000000000 -0300
++++ ppsspp-git/ext/native/image/png_load.cpp	2015-06-25 15:37:48.000000000 -0300
+@@ -5,7 +5,7 @@
+ #ifdef USING_QT_UI
+ #include <QtGui/QImage>
+ #else
+-#include "libpng17/png.h"
++#include <libpng/png.h>
+ #endif
+ 
+ #include "png_load.h"
